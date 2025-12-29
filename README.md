@@ -1,37 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AccessCheck  
 
-## Getting Started
+## ✅ The 10 Accessibility Rules To Check
 
-First, run the development server:
+### 1️⃣ Images have alt text
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Check:** All `<img>` elements have an `alt` attribute.
+- **Fail:** Missing `alt`
+- **Warning:** `alt=""` (decorative only)
+- **Why it matters:** Screen readers can’t describe images.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2️⃣ Buttons have accessible names
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Check:** Buttons have text, `aria-label`, or `aria-labelledby`.
+- **Fail:** Icon-only buttons without labels.
+- **Why it matters:** Screen readers announce button purpose.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 3️⃣ Inputs have labels
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Check:** Inputs are associated with `<label>` or `aria-label`.
+- **Fail:** Placeholder-only inputs.
+- **Why it matters:** Users don’t know what input is for.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### 4️⃣ Page has a single `<h1>`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Check:** Exactly one `<h1>` exists.
+- **Fail:** No `<h1>` or multiple `<h1>`s.
+- **Why it matters:** Screen readers use it as page title.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# access-check
+---
+
+### 5️⃣ Heading order is logical
+
+- **Check:** No heading level jumps (`h1 → h3`).
+- **Fail:** Skipped levels.
+- **Why it matters:** Broken content structure.
+
+---
+
+### 6️⃣ Page has a main landmark
+
+- **Check:** `<main>` or `role="main"` exists.
+- **Fail:** Missing main content region.
+- **Why it matters:** Screen reader navigation.
+
+---
+
+### 7️⃣ Links have meaningful text
+
+- **Check:** `<a>` text is descriptive.
+- **Fail:** “Click here”, “Read more”.
+- **Why it matters:** Links must make sense out of context.
+
+---
+
+### 8️⃣ Clickable elements are keyboard-focusable
+
+- **Check:** Interactive elements are reachable via keyboard.
+- **Fail:** `<div onClick>` without `tabindex`.
+- **Why it matters:** Keyboard-only users.
+
+---
+
+### 9️⃣ ARIA roles are not misused
+
+- **Check:** ARIA not used on native elements unnecessarily.
+- **Warning:** `role="button"` on `<button>`.
+- **Fail:** Invalid ARIA role.
+- **Why it matters:** ARIA misuse breaks accessibility.
+
+---
+
+### 🔟 Color contrast (basic heuristic)
+
+- **Check:** Text contrast meets WCAG AA (approx).
+- **Warning:** Below threshold.
+- **Why it matters:** Low vision users.
