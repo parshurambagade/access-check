@@ -1,5 +1,7 @@
 import { urlSchema } from "@/schemas/url.schema";
 import { NextRequest } from "next/server";
+import { fetchHtml } from "@/lib/fetchHtml";
+import runAudit from "@/lib/audit/runAudit";
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,7 +26,12 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    return new Response(JSON.stringify({ url }), { status: 200 });
+    // fetch html content from url
+    const html = await fetchHtml(url);
+
+    const results = runAudit(html);
+
+    return new Response(JSON.stringify({ url, results }), { status: 200 });
   } catch {
     return new Response(null, { status: 500 });
   }
