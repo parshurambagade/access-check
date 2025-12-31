@@ -1,7 +1,9 @@
 import { urlSchema } from "@/schemas/url.schema";
 import { NextRequest } from "next/server";
-import { fetchHtml } from "@/lib/fetchHtml";
+import fetchHtml from "@/lib/fetchHtml";
 import runAudit from "@/lib/audit/runAudit";
+import { AuditResult } from "@/types";
+import prepareAuditResult from "@/lib/audit/prepareAuditResult";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,29 +12,46 @@ export async function POST(req: NextRequest) {
     const parsedBody = urlSchema.safeParse(body);
 
     if (!parsedBody.success) {
-      return new Response(
-        JSON.stringify({ error: parsedBody.error.flatten() }),
-        {
-          status: 400,
-        }
+      return Response.json(
+        { error: parsedBody.error.flatten() },
+        { status: 400 }
       );
     }
 
     const { url } = parsedBody.data;
 
-    if (!url) {
-      return new Response(JSON.stringify({ error: "URL is required" }), {
-        status: 400,
-      });
-    }
-
     // fetch html content from url
     const html = await fetchHtml(url);
 
-    const results = runAudit(html);
+    if (!html) {
+      return Response.json(
+        { error: "Unable to fetch HTML from the provided URL" },
+        { status: 500 }
+      );
+    }
 
-    return new Response(JSON.stringify({ url, results }), { status: 200 });
-  } catch {
-    return new Response(null, { status: 500 });
+    const auditTests = runAudit(html);
+    const result: AuditResult = prepareAuditResult(url, auditTests);
+
+    return Response.json(result, { status: 200 });
+  } catch (error) {
+    // Handle JSON parsing errors
+    if (error instanceof SyntaxError) {
+      return Response.json(
+        { error: "Invalid JSON in request body" },
+        { status: 400 }
+      );
+    }
+
+    // Handle other errors
+    if (error instanceof Error) {
+      return Response.json(
+        { error: error.message || "Internal server error" },
+        { status: 500 }
+      );
+    }
+
+    // Fallback for unknown error types
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
