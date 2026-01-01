@@ -47,7 +47,6 @@ const checkBtnAccessibleNames = ($: CheerioAPI): RuleResult => {
     );
   });
 
-  console.log(buttonsWithoutAccessibleName.length, buttons.length);
   // calculate the score
   auditResult.score = determineScore(
     buttons.length,
