@@ -2,6 +2,7 @@ import { RuleResult, RuleStatus } from "@/types";
 import { CheerioAPI } from "cheerio";
 import { AUDIT_RULES } from "@/constants/audit";
 import determineStatus from "../determineStatus";
+import determineScore from "../determineScore";
 
 const checkAltText = ($: CheerioAPI): RuleResult => {
   const auditResult: RuleResult = {
@@ -27,18 +28,15 @@ const checkAltText = ($: CheerioAPI): RuleResult => {
 
   // if all images have alt text, return pass
   if (imagesWithoutAlt.length === 0) {
-    auditResult.score = auditResult.issues.length === 0 ? 10 : 0;
-    auditResult.status =
-      auditResult.issues.length === 0 ? RuleStatus.PASS : RuleStatus.FAIL;
+    auditResult.score = 10;
+    auditResult.status = RuleStatus.PASS;
     return auditResult;
   }
 
   // if some images have alt text, return warning || fail
-  auditResult.score = Math.floor(
-    (10 * imagesWithoutAlt.length) / images.length
-  );
+  auditResult.score = determineScore(images.length, imagesWithoutAlt.length);
   auditResult.status = determineStatus(auditResult.score);
-  imagesWithoutAlt.each((index, element) => {
+  imagesWithoutAlt.each((_, element) => {
     const img = $(element);
     auditResult.issues.push({
       selector: img.attr("src") || "",

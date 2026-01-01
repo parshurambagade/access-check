@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import checkSingleH1 from "./rules/checkSingleH1";
 import checkAltText from "./rules/checkAltText";
+import checkBtnAccessibleNames from "./rules/checkBtnAccessibleNames";
 
 export default function runAudit(html: string) {
   const $ = cheerio.load(html);
@@ -9,6 +10,7 @@ export default function runAudit(html: string) {
 
   results.push(checkSingleH1($));
   results.push(checkAltText($));
+  results.push(checkBtnAccessibleNames($));
 
   return results;
 }
