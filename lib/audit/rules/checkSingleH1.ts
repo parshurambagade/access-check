@@ -15,7 +15,10 @@ const checkSingleH1 = ($: CheerioAPI): RuleResult => {
   if (count !== 1) {
     auditResult.issues.push({
       selector: "h1",
-      issue: `Page has ${count} h1 elements, but should have exactly 1.`,
+      issue:
+        count > 1
+          ? "Page has multiple h1 elements, but should have exactly 1."
+          : "Page has no h1 element.",
     });
   } else {
     auditResult.score = 10;
