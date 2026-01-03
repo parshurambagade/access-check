@@ -3,6 +3,7 @@ import checkSingleH1 from "./rules/checkSingleH1";
 import checkAltText from "./rules/checkAltText";
 import checkBtnAccessibleNames from "./rules/checkBtnAccessibleNames";
 import checkInputsHaveLabels from "./rules/checkInputsHaveLabels";
+import checkHeadingsOrder from "./rules/checkHeadingsOrder";
 
 export default function runAudit(html: string) {
   const $ = cheerio.load(html);
@@ -13,6 +14,6 @@ export default function runAudit(html: string) {
   results.push(checkAltText($));
   results.push(checkBtnAccessibleNames($));
   results.push(checkInputsHaveLabels($));
-
+  results.push(checkHeadingsOrder($));
   return results;
 }

@@ -7,43 +7,42 @@ import determineScore from "../determineScore";
 const checkAltText = ($: CheerioAPI): RuleResult => {
   const auditResult: RuleResult = {
     ...AUDIT_RULES.IMG_ALT,
-    status: RuleStatus.FAIL,
     score: 0,
+    status: RuleStatus.FAIL,
     issues: [],
   };
 
   const images = $("img");
 
   if (images.length === 0) {
-    auditResult.status = RuleStatus.PASS;
     auditResult.score = 10;
+    auditResult.status = RuleStatus.PASS;
     return auditResult;
   }
 
-  const imagesWithoutAlt = images.filter((index, element) => {
+  // check if all images have alt text
+  images.each((_, element) => {
     const img = $(element);
     const alt = img.attr("alt");
-    return !alt;
+    if (!alt) {
+      // if image has no alt text, add issue
+      auditResult.issues.push({
+        selector: img.attr("src") || "",
+        issue: "Image missing alt text.",
+      });
+    }
   });
 
-  // if all images have alt text, return pass
-  if (imagesWithoutAlt.length === 0) {
+  if (auditResult.issues.length === 0) {
     auditResult.score = 10;
     auditResult.status = RuleStatus.PASS;
-    return auditResult;
+  } else if (auditResult.issues.length > 0) {
+    auditResult.score = determineScore(
+      images.length,
+      auditResult.issues.length
+    );
+    auditResult.status = determineStatus(auditResult.score);
   }
-
-  // if some images have alt text, return warning || fail
-  auditResult.score = determineScore(images.length, imagesWithoutAlt.length);
-  auditResult.status = determineStatus(auditResult.score);
-  imagesWithoutAlt.each((_, element) => {
-    const img = $(element);
-    auditResult.issues.push({
-      selector: img.attr("src") || "",
-      issue: "Image missing alt text.",
-    });
-  });
-
   return auditResult;
 };
 

@@ -12,8 +12,8 @@ export interface RuleIssue {
 export interface RuleResult {
   id: string;
   title: string;
-  status: RuleStatus;
   score: number;
+  status: RuleStatus;
   whyItMatters: readonly string[];
   howToFix: readonly string[];
   issues: RuleIssue[];
