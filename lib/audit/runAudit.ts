@@ -6,6 +6,7 @@ import checkInputsHaveLabels from "./rules/checkInputsHaveLabels";
 import checkHeadingsOrder from "./rules/checkHeadingsOrder";
 import checkMainLandmark from "./rules/checkMainLandmark";
 import checkLinkText from "./rules/checkLinkText";
+import checkClickableElementsTabIndex from "./rules/checkClickableElementsTabIndex";
 
 export default function runAudit(html: string) {
   const $ = cheerio.load(html);
@@ -19,6 +20,7 @@ export default function runAudit(html: string) {
   results.push(checkHeadingsOrder($));
   results.push(checkMainLandmark($));
   results.push(checkLinkText($));
+  results.push(checkClickableElementsTabIndex($));
 
   return results;
 }
