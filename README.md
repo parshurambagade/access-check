@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # AccessCheck  
+=======
+# AccessCheck
+>>>>>>> origin/feat/api_routes
 
 ## ✅ The 10 Accessibility Rules To Check
 
@@ -76,8 +80,8 @@
 
 ---
 
-### 🔟 Color contrast (basic heuristic)
+### 🔟 Document language is defined
 
-- **Check:** Text contrast meets WCAG AA (approx).
-- **Warning:** Below threshold.
-- **Why it matters:** Low vision users.
+- **Check:** <html lang="en"> exists
+- **Fail:** lang attribute missing
+- **Why it matters:** Screen readers need language to pronounce text correctly
