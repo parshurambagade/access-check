@@ -8,6 +8,7 @@ import checkMainLandmark from "./rules/checkMainLandmark";
 import checkLinkText from "./rules/checkLinkText";
 import checkClickableElementsTabIndex from "./rules/checkClickableElementsTabIndex";
 import checkAriaRoleMisuse from "@/lib/audit/rules/checkAriaRoleMisuse";
+import checkDocumentLanguage from "./rules/checkDocumentLanguage";
 
 export default function runAudit(html: string) {
   const $ = cheerio.load(html);
@@ -23,6 +24,7 @@ export default function runAudit(html: string) {
   results.push(checkLinkText($));
   results.push(checkClickableElementsTabIndex($));
   results.push(checkAriaRoleMisuse($));
+  results.push(checkDocumentLanguage($));
 
   return results;
 }

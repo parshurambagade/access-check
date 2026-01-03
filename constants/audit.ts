@@ -1,4 +1,11 @@
 export const AUDIT_RULES = {
+  DOCUMENT_LANGUAGE: {
+    id: "document-language",
+    title: "Document language is defined",
+    whyItMatters: ["Screen readers need language to pronounce text correctly."],
+    howToFix: [`Add <html lang='en'> to the document.`],
+  },
+
   IMG_ALT: {
     id: "img-alt",
     title: "Images have alt text",
@@ -92,15 +99,15 @@ export const AUDIT_RULES = {
     ],
   },
 
-  COLOR_CONTRAST: {
-    id: "color-contrast",
-    title: "Color contrast meets WCAG AA",
-    whyItMatters: ["Low contrast text is difficult for users with low vision."],
-    howToFix: [
-      "Increase contrast between text and background.",
-      "Use WCAG AA contrast ratios as guidance.",
-    ],
-  },
+  // COLOR_CONTRAST: {
+  //   id: "color-contrast",
+  //   title: "Color contrast meets WCAG AA",
+  //   whyItMatters: ["Low contrast text is difficult for users with low vision."],
+  //   howToFix: [
+  //     "Increase contrast between text and background.",
+  //     "Use WCAG AA contrast ratios as guidance.",
+  //   ],
+  // },
 } as const;
 
 export const GENERIC_LINK_TEXTS = [
