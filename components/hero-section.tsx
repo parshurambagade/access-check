@@ -20,7 +20,7 @@ const features = [
 
 const HeroSection = () => {
   return (
-    <div className="text-center space-y-8">
+    <div className="text-center space-y-6">
       {/* Badge */}
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
         <span className="relative flex h-2 w-2">
@@ -45,7 +45,7 @@ const HeroSection = () => {
       </div>
 
       {/* Features */}
-      <div className="flex flex-wrap justify-center gap-6 pt-4">
+      <div className="flex flex-wrap justify-center gap-6 pt-2">
         {features.map((feature) => (
           <div
             key={feature.title}

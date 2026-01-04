@@ -20,16 +20,16 @@ const SearchCard = ({
 }: SearchCardProps) => {
   return (
     <div className="mt-12">
-      <Card className="border-2 border-border/50 shadow-xl shadow-primary/5 overflow-hidden">
+      <Card className="border-2 border-border/50 shadow-xl shadow-primary/5 overflow-hidden p-0">
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
-        <CardContent className="relative p-6 sm:p-8">
+        <CardContent className="relative p-8">
           <form onSubmit={generateReport}>
             <div className="flex flex-col gap-4">
               {/* Input row */}
               <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1 group">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
-                    <Globe className="h-5 w-5" />
+                    <Globe className="h-4 w-4" />
                   </div>
                   <Input
                     type="url"
@@ -37,7 +37,7 @@ const SearchCard = ({
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     disabled={isLoading}
-                    className="h-14 pl-12 text-base bg-background border-2 focus:border-primary focus:ring-primary/20 transition-all"
+                    className="h-12 pl-12 text-base bg-background border-2 focus:border-primary focus:ring-primary/20 transition-all"
                     aria-label="Website URL"
                   />
                 </div>
@@ -45,16 +45,16 @@ const SearchCard = ({
                   type="submit"
                   disabled={isLoading}
                   size="lg"
-                  className="h-14 px-8 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  className="h-12 px-6 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Analyzing...
                     </>
                   ) : (
                     <>
-                      <Search className="mr-2 h-5 w-5" />
+                      <Search className="mr-2 h-4 w-4" />
                       Analyze
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </>

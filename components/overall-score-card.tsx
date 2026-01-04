@@ -25,7 +25,7 @@ const OverallScoreCard = ({
   getScoreLabel,
 }: OverallScoreCardProps) => {
   return (
-    <Card className="border-2 border-border/50 shadow-xl overflow-hidden">
+    <Card className="border-2 border-border/50 shadow-xl overflow-hidden gap-6">
       <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
       <CardHeader className="relative pb-0">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
@@ -116,9 +116,11 @@ const OverallScoreCard = ({
                 {/* Score number */}
                 <div className="text-center z-10">
                   <span
-                    className={`text-4xl font-bold bg-linear-to-r ${getScoreGradient(
+                    className={`font-bold bg-linear-to-r ${getScoreGradient(
                       data.overallScore
-                    )} bg-clip-text text-transparent`}
+                    )} bg-clip-text text-transparent ${
+                      animatedScore === 100 ? "text-3xl" : "text-4xl"
+                    }`}
                   >
                     {animatedScore}
                   </span>
@@ -140,7 +142,7 @@ const OverallScoreCard = ({
         </div>
       </CardHeader>
 
-      <CardContent className="relative pt-8">
+      <CardContent className="relative pt-0">
         {/* Summary Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {/* Passed */}

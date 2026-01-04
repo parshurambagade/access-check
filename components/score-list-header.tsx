@@ -23,14 +23,14 @@ const ScoreListHeader = ({
       <div className="flex gap-2">
         <button
           onClick={expandAll}
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           Expand all
         </button>
         <span className="text-muted-foreground">·</span>
         <button
           onClick={collapseAll}
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           Collapse all
         </button>

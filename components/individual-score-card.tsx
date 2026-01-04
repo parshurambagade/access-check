@@ -55,12 +55,12 @@ const IndividualScoreCard = ({
   return (
     <Card
       key={rule.id}
-      className="border-2 border-border/50 overflow-hidden hover:border-border transition-colors"
+      className="border-2 border-border/50 overflow-hidden hover:border-border py-0  transition-colors space-y-0 gap-0  "
       style={{ animationDelay: `${index * 50}ms` }}
     >
       <button
         onClick={() => toggleRule(rule.id)}
-        className="w-full text-left p-5 hover:bg-muted/30 transition-colors"
+        className="w-full text-left p-6 cursor-pointer hover:bg-muted/20 transition-colors"
       >
         <div className="flex items-center gap-4">
           <div
@@ -117,7 +117,7 @@ const IndividualScoreCard = ({
       </button>
 
       {isExpanded && (
-        <div className="px-5 pb-5 space-y-5 border-t border-border/50 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="px-5 pb-6 space-y-6 border-t border-border/50 animate-in fade-in slide-in-from-top-2 duration-200">
           {/* Why It Matters */}
           <div className="pt-5">
             <h4 className="font-semibold mb-3 flex items-center gap-2 text-sm">

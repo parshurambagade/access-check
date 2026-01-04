@@ -2,7 +2,7 @@ import { Accessibility, Sparkles } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="relative border-t border-border/50 mt-20 bg-muted/30">
+    <footer className="relative border-t border-border/50 mt-12 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}

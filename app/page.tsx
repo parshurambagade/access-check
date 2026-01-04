@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
 
       {/* Main Content */}
-      <main className="relative">
+      <main className="relative min-h-[calc(100vh-10rem)]">
         <AccessibilityChecker />
       </main>
 
