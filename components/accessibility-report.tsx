@@ -23,7 +23,7 @@ export function AccessibilityReport({ data }: AccessibilityReportProps) {
   } = useAccessibilityReport(data);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Overall Score Card */}
       <OverallScoreCard
         data={data}
@@ -34,7 +34,7 @@ export function AccessibilityReport({ data }: AccessibilityReportProps) {
       />
 
       {/* Rules List */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* Score List Header */}
         <ScoreListHeader
           data={data}
@@ -43,7 +43,7 @@ export function AccessibilityReport({ data }: AccessibilityReportProps) {
         />
 
         {/* Individual Score Cards */}
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           {data.rules.map((rule, index) => (
             <IndividualScoreCard
               key={index}

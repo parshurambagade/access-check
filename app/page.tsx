@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
 
       {/* Main Content */}
-      <main className="relative min-h-[calc(100vh-10rem)]">
+      <main className="relative min-h-[calc(100vh-10rem)] sm:min-h-[calc(100vh-10rem)] flex items-center justify-center">
         <AccessibilityChecker />
       </main>
 

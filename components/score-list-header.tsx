@@ -13,24 +13,24 @@ const ScoreListHeader = ({
   collapseAll,
 }: ScoreListHeaderProps) => {
   return (
-    <div className="flex items-center justify-between">
-      <h2 className="text-xl font-bold flex items-center gap-2">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+      <h2 className="text-lg sm:text-xl font-bold flex items-center gap-2">
         <span>Detailed Results</span>
-        <Badge variant="outline" className="font-normal">
+        <Badge variant="outline" className="font-normal text-xs sm:text-sm">
           {data.rules.length} rules
         </Badge>
       </h2>
-      <div className="flex gap-2">
+      <div className="flex gap-2 text-xs sm:text-sm">
         <button
           onClick={expandAll}
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           Expand all
         </button>
         <span className="text-muted-foreground">·</span>
         <button
           onClick={collapseAll}
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           Collapse all
         </button>

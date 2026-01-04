@@ -20,43 +20,47 @@ const features = [
 
 const HeroSection = () => {
   return (
-    <div className="text-center space-y-6">
+    <div className="text-center space-y-4 sm:space-y-6">
       {/* Badge */}
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
-        <span className="relative flex h-2 w-2">
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium border border-primary/20">
+        <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-primary"></span>
         </span>
         Free Accessibility Testing
       </div>
 
       {/* Heading */}
-      <div className="space-y-4">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance leading-[1.1]">
+      <div className="space-y-3 sm:space-y-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance leading-[1.15] sm:leading-[1.1]">
           Make Your Website
-          <span className="block mt-2 bg-linear-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-gradient">
+          <span className="block mt-1 sm:mt-2 bg-linear-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-gradient">
             Accessible to Everyone
           </span>
         </h1>
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed px-2">
           Test your website for accessibility issues and get detailed
           recommendations to improve WCAG compliance.
         </p>
       </div>
 
-      {/* Features */}
-      <div className="flex flex-wrap justify-center gap-6 pt-2">
+      {/* Features - Stack on mobile, row on larger screens */}
+      <div className="hidden sm:flex flex-col items-center sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 pt-2">
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="flex items-center gap-3 text-sm text-muted-foreground"
+            className="flex items-center gap-2.5 sm:gap-3 text-sm text-muted-foreground bg-muted/50 sm:bg-transparent rounded-lg p-2.5 sm:p-0 w-max sm:w-auto"
           >
-            <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-              <feature.icon className="h-4 w-4 text-primary" />
+            <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <feature.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
             </div>
             <div className="text-left">
-              <p className="font-medium text-foreground">{feature.title}</p>
-              <p className="text-xs">{feature.description}</p>
+              <p className="font-medium text-foreground text-sm">
+                {feature.title}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {feature.description}
+              </p>
             </div>
           </div>
         ))}

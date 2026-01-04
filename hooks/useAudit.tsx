@@ -9,10 +9,15 @@ const useAudit = () => {
 
   const generateReport = async (e: React.FormEvent) => {
     e.preventDefault();
+    let sanitizedUrl = url.trim().toLowerCase();
 
-    if (!url) {
+    if (!sanitizedUrl) {
       setError("Please enter a valid URL");
       return;
+    }
+
+    if (!sanitizedUrl.startsWith("https://")) {
+      sanitizedUrl = "https://" + sanitizedUrl;
     }
 
     setIsLoading(true);
@@ -25,15 +30,16 @@ const useAudit = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url: sanitizedUrl }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to generate report");
+        throw new Error(
+          "Failed to generate report. Please try again."
+        );
       }
 
       const data = await response.json();
-      console.log("Data", data);
       setReport(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
