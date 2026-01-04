@@ -1,87 +1,107 @@
-<<<<<<< HEAD
-# AccessCheck  
-=======
-# AccessCheck
->>>>>>> origin/feat/api_routes
+## AccessCheck
 
-## ✅ The 10 Accessibility Rules To Check
+**AccessCheck** is a lightweight web accessibility audit tool that checks a URL against **10 common accessibility rules** and generates a clean, actionable report (scores, issues, and how-to-fix guidance).
 
-### 1️⃣ Images have alt text
+- **Live demo**: [access-check-web.vercel.app](https://access-check-web.vercel.app/)
+- **GitHub**: [github.com/parshurambagade/access-check](https://github.com/parshurambagade/access-check)
 
-- **Check:** All `<img>` elements have an `alt` attribute.
-- **Fail:** Missing `alt`
-- **Warning:** `alt=""` (decorative only)
-- **Why it matters:** Screen readers can’t describe images.
+### Screenshots
 
----
+<table>
+  <tr>
+    <td><img src="./screenshots/home.webp" alt="Home / URL input" /></td>
+    <td><img src="./screenshots/summary.webp" alt="Report summary" /></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/rules-list.webp" alt="Rule details" /></td>
+    <td><img src="./screenshots/issues.webp" alt="Issue details" /></td>
+  </tr>
+</table>
 
-### 2️⃣ Buttons have accessible names
+### What it does
 
-- **Check:** Buttons have text, `aria-label`, or `aria-labelledby`.
-- **Fail:** Icon-only buttons without labels.
-- **Why it matters:** Screen readers announce button purpose.
+- **Input**: A website URL
+- **Process**: Fetch HTML (server-side) → parse with Cheerio → run rules → generate a report
+- **Output**: Overall score, rule-by-rule results, and recommended fixes
 
----
+### Accessibility rules covered (10)
 
-### 3️⃣ Inputs have labels
+This project does **not** aim to replace enterprise-grade scanners. Instead, it focuses on **10 high-signal checks** that catch common issues quickly:
 
-- **Check:** Inputs are associated with `<label>` or `aria-label`.
-- **Fail:** Placeholder-only inputs.
-- **Why it matters:** Users don’t know what input is for.
+1. **Document language is defined** (e.g., `<html lang=\"en\">`)
+2. **Images have alt text**
+3. **Buttons have accessible names**
+4. **Inputs have labels**
+5. **Page has a single `<h1>`**
+6. **Heading order is logical**
+7. **Page has a main landmark** (`<main>` / `role=\"main\"`)
+8. **Links have meaningful text**
+9. **Clickable elements are keyboard-focusable**
+10. **ARIA roles are not misused** (invalid roles, redundant roles on native elements)
 
----
+### Tech stack
 
-### 4️⃣ Page has a single `<h1>`
+- **Frontend**: Next.js (App Router), React, TypeScript
+- **UI**: Tailwind CSS v4, Shadcn UI
+- **Backend**: Next.js Route Handlers
+- **Validation**: Zod
+- **HTML parsing**: Cheerio
 
-- **Check:** Exactly one `<h1>` exists.
-- **Fail:** No `<h1>` or multiple `<h1>`s.
-- **Why it matters:** Screen readers use it as page title.
+### Local setup
 
----
+```bash
+pnpm install
+pnpm dev
+```
 
-### 5️⃣ Heading order is logical
+Open `http://localhost:3000`.
 
-- **Check:** No heading level jumps (`h1 → h3`).
-- **Fail:** Skipped levels.
-- **Why it matters:** Broken content structure.
+### API
 
----
+#### `POST /api/audit`
 
-### 6️⃣ Page has a main landmark
+**Request body**:
 
-- **Check:** `<main>` or `role="main"` exists.
-- **Fail:** Missing main content region.
-- **Why it matters:** Screen reader navigation.
+```json
+{ "url": "https://example.com" }
+```
 
----
+**Example**:
 
-### 7️⃣ Links have meaningful text
+```bash
+curl -X POST http://localhost:3000/api/audit \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://example.com"}'
+```
 
-- **Check:** `<a>` text is descriptive.
-- **Fail:** “Click here”, “Read more”.
-- **Why it matters:** Links must make sense out of context.
+**Response (shape)**:
 
----
+- `url`: audited URL
+- `overallScore`: 0–100
+- `summary`: pass/warning/fail counts
+- `rules[]`: per-rule status, score, issues, and guidance
 
-### 8️⃣ Clickable elements are keyboard-focusable
+### Project structure (high level)
 
-- **Check:** Interactive elements are reachable via keyboard.
-- **Fail:** `<div onClick>` without `tabindex`.
-- **Why it matters:** Keyboard-only users.
+- **API route**: `app/api/audit/route.ts`
+- **Audit engine**: `lib/audit/runAudit.ts` + `lib/audit/rules/*`
+- **Rule metadata**: `constants/audit.ts`
+- **UI**: `components/*` (search + report)
 
----
+### Notes / limitations
 
-### 9️⃣ ARIA roles are not misused
+- **Some sites block server fetches (403/anti-bot/CDN protections)**. When that happens, the API returns a fetch error. Try another URL or a site that allows server-side fetching.
+- These checks are intentionally scoped: they cover common patterns, not every WCAG edge case.
 
-- **Check:** ARIA not used on native elements unnecessarily.
-- **Warning:** `role="button"` on `<button>`.
-- **Fail:** Invalid ARIA role.
-- **Why it matters:** ARIA misuse breaks accessibility.
+### Roadmap (nice next steps)
 
----
+- Add more rules (color contrast, form error messaging, skip links, ARIA attributes validity)
+- Better reporting (export JSON/PDF, shareable report link)
+- Smarter fetch (timeouts, retries, follow redirects, better error messages)
 
-### 🔟 Document language is defined
+### Author
 
-- **Check:** <html lang="en"> exists
-- **Fail:** lang attribute missing
-- **Why it matters:** Screen readers need language to pronounce text correctly
+**Parshuram Bagade**
+
+- GitHub: [github.com/parshurambagade](https://github.com/parshurambagade)
+- Portfolio: [parshurambagade.vercel.app](https://parshurambagade.vercel.app)

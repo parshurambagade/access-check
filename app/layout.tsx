@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     "accessibility testing",
     "accessibility audit",
   ],
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
